@@ -1,0 +1,830 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="comboman.game">
+  <ClassDiagramComponents>
+    <Class name="Account" package="comboman.game" visibility="public" xPosition="6789.0" yPosition="1997.0">
+      <Fields>
+        <Field name="game" type="GameManager" visibility="package"/>
+        <Field name="userId" type="int" visibility="private"/>
+        <Field name="nickName" type="String" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="String" name="nickName"/>
+          <Argument type="String" name="email"/>
+          <Argument type="String" name="password"/>
+        </Constructor>
+        <Constructor visibility="public">
+          <Argument type="int" name="userId"/>
+          <Argument type="String" name="nickName"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getuserID" returnType="int" visibility="public"/>
+        <Method name="getNick" returnType="String" visibility="public"/>
+        <Method name="toString" returnType="String" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="AttackBuff" package="comboman.game" visibility="public" xPosition="2513.0" yPosition="2606.0">
+      <Fields>
+        <Field name="name" type="String" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="int" name="duration"/>
+          <Argument type="float" name="startTime"/>
+        </Constructor>
+        <Constructor visibility="public">
+          <Argument type="Room" name="room"/>
+          <Argument type="Vector2" name="startPosition"/>
+          <Argument type="Texture" name="texture"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="use" returnType="boolean" visibility="public">
+          <Argument type="Player" name="player"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Game" package="comboman.game" visibility="public" xPosition="296.0" yPosition="438.0">
+      <Fields>
+        <Field name="rooms" type="ArrayList&lt;Room&gt;" visibility="package"/>
+        <Field name="users" type="ArrayList&lt;Account&gt;" visibility="package"/>
+        <Field name="batch" type="SpriteBatch" visibility="public"/>
+        <Field name="font" type="BitmapFont" visibility="public"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="host" returnType="void" visibility="public">
+          <Argument type="String" name="password"/>
+        </Method>
+        <Method name="join" returnType="void" visibility="public">
+          <Argument type="int" name="roomID"/>
+        </Method>
+        <Method name="register" returnType="void" visibility="public">
+          <Argument type="String" name="email"/>
+          <Argument type="String" name="password"/>
+          <Argument type="String" name="nickname"/>
+        </Method>
+        <Method name="login" returnType="boolean" visibility="public">
+          <Argument type="String" name="email"/>
+          <Argument type="String" name="password"/>
+        </Method>
+        <Method name="getGame" returnType="Game" visibility="public"/>
+        <Method name="create" returnType="void" visibility="public"/>
+        <Method name="render" returnType="void" visibility="public"/>
+        <Method name="dispose" returnType="void" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="GameManager" package="comboman.game" visibility="public" xPosition="2961.0" yPosition="1457.0">
+      <Fields>
+        <Field name="batch" type="SpriteBatch" visibility="public"/>
+        <Field name="font" type="BitmapFont" visibility="public"/>
+        <Field name="rooms" type="ArrayList&lt;Room&gt;" visibility="package"/>
+        <Field name="users" type="ArrayList&lt;Account&gt;" visibility="package"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="host" returnType="void" visibility="public">
+          <Argument type="String" name="password"/>
+        </Method>
+        <Method name="join" returnType="void" visibility="public">
+          <Argument type="int" name="roomID"/>
+        </Method>
+        <Method name="register" returnType="void" visibility="public">
+          <Argument type="String" name="email"/>
+          <Argument type="String" name="password"/>
+          <Argument type="String" name="nickname"/>
+        </Method>
+        <Method name="login" returnType="boolean" visibility="public">
+          <Argument type="String" name="email"/>
+          <Argument type="String" name="password"/>
+        </Method>
+        <Method name="getGame" returnType="Game" visibility="public"/>
+        <Method name="create" returnType="void" visibility="public"/>
+        <Method name="render" returnType="void" visibility="public"/>
+        <Method name="dispose" returnType="void" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="GameManagerClient" package="comboman.game" visibility="public" xPosition="164.0" yPosition="3035.0">
+      <Fields/>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="Login" package="comboman.game" visibility="public" xPosition="347.0" yPosition="1139.0">
+      <Fields>
+        <Field name="batch" type="SpriteBatch" visibility="public"/>
+        <Field name="font" type="BitmapFont" visibility="public"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="create" returnType="void" visibility="public"/>
+        <Method name="render" returnType="void" visibility="public"/>
+        <Method name="dispose" returnType="void" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="Map" package="comboman.game" visibility="public" xPosition="6340.0" yPosition="2467.0">
+      <Fields>
+        <Field name="room" type="Room" visibility="package"/>
+        <Field name="sizeX" type="int" visibility="private"/>
+        <Field name="sizeY" type="int" visibility="private"/>
+        <Field name="mapName" type="String" visibility="private"/>
+        <Field name="spawnPoints" type="List&lt;Point&gt;" visibility="private"/>
+        <Field name="tiledMap" type="TiledMap" visibility="public"/>
+        <Field name="camera" type="OrthographicCamera" visibility="public"/>
+        <Field name="tiledMapRenderer" type="TiledMapRenderer" visibility="public"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="String" name="mapName"/>
+        </Constructor>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods/>
+    </Class>
+    <Class name="Melee" package="comboman.game" visibility="public" xPosition="4932.0" yPosition="1079.0">
+      <Fields>
+        <Field name="attackRange" type="float" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="String" name="name"/>
+          <Argument type="int" name="uses"/>
+          <Argument type="int" name="attackspeed"/>
+          <Argument type="Animation" name="animation"/>
+          <Argument type="float" name="attackRange"/>
+          <Argument type="float" name="currentTime"/>
+          <Argument type="Vector2" name="startPosition"/>
+          <Argument type="Texture" name="texture"/>
+          <Argument type="int" name="damage"/>
+        </Constructor>
+        <Constructor visibility="public">
+          <Argument type="String" name="name"/>
+          <Argument type="int" name="uses"/>
+          <Argument type="int" name="attackspeed"/>
+          <Argument type="Animation" name="animation"/>
+          <Argument type="float" name="attackRange"/>
+          <Argument type="float" name="currentTime"/>
+          <Argument type="Vector2" name="startPosition"/>
+          <Argument type="int" name="damage"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="meleeAttack" returnType="void" visibility="public">
+          <Argument type="Vector2" name="playerPosition"/>
+          <Argument type="float" name="attackSpeedModifier"/>
+          <Argument type="Room" name="room"/>
+          <Argument type="Direction" name="direction"/>
+          <Argument type="float" name="attackTime"/>
+          <Argument type="int" name="playerId"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="OneUp" package="comboman.game" visibility="public" xPosition="6733.0" yPosition="1438.0">
+      <Fields>
+        <Field name="name" type="String" visibility="private"/>
+        <Field name="addLives" type="int" visibility="private" isFinal="true"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="int" name="duration"/>
+          <Argument type="float" name="startTime"/>
+        </Constructor>
+        <Constructor visibility="public">
+          <Argument type="Room" name="room"/>
+          <Argument type="Vector2" name="startPosition"/>
+          <Argument type="Texture" name="texture"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="use" returnType="boolean" visibility="public">
+          <Argument type="Player" name="player"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="PickUp" package="comboman.game" visibility="public" xPosition="5169.0" yPosition="1779.0">
+      <Fields>
+        <Field name="room" type="Room" visibility="private"/>
+        <Field name="weapon" type="Weapon" visibility="private"/>
+        <Field name="destroyed" type="boolean" visibility="private"/>
+        <Field name="sprite" type="Sprite" visibility="public"/>
+        <Field name="position" type="Vector2" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="Room" name="room"/>
+          <Argument type="Melee" name="weapon"/>
+          <Argument type="Vector2" name="startPosition"/>
+          <Argument type="Texture" name="texture"/>
+        </Constructor>
+        <Constructor visibility="public">
+          <Argument type="Room" name="room"/>
+          <Argument type="Ranged" name="weapon"/>
+          <Argument type="Vector2" name="startPosition"/>
+          <Argument type="Texture" name="texture"/>
+        </Constructor>
+        <Constructor visibility="public">
+          <Argument type="Room" name="room"/>
+          <Argument type="Weapon" name="weapon"/>
+          <Argument type="Vector2" name="startPosition"/>
+          <Argument type="Texture" name="texture"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="use" returnType="void" visibility="public">
+          <Argument type="Player" name="player"/>
+        </Method>
+        <Method name="draw" returnType="void" visibility="public">
+          <Argument type="Batch" name="batch"/>
+        </Method>
+        <Method name="destroy" returnType="void" visibility="public"/>
+        <Method name="getDestroyed" returnType="boolean" visibility="public"/>
+        <Method name="getWeapon" returnType="Weapon" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="Player" package="comboman.game" visibility="public" xPosition="1620.0" yPosition="3315.0">
+      <Fields>
+        <Field name="powerup" type="ArrayList&lt;PowerUp&gt;" visibility="package" isTransient="true"/>
+        <Field name="playerID" type="int" visibility="private" isFinal="true"/>
+        <Field name="nickName" type="String" visibility="private"/>
+        <Field name="lives" type="int" visibility="private" isTransient="true"/>
+        <Field name="maxLives" type="int" visibility="private" isTransient="true"/>
+        <Field name="currentHp" type="float" visibility="private" isTransient="true"/>
+        <Field name="maxHp" type="float" visibility="private" isTransient="true"/>
+        <Field name="moveSpeed" type="int" visibility="private" isTransient="true"/>
+        <Field name="defaultMoveSpeed" type="int" visibility="private" isTransient="true"/>
+        <Field name="speedBoostEndTime" type="float" visibility="private" isTransient="true"/>
+        <Field name="collision" type="boolean" visibility="public" isTransient="true"/>
+        <Field name="attackSpeedModifier" type="float" visibility="private" isTransient="true"/>
+        <Field name="team" type="Team" visibility="private" isTransient="true"/>
+        <Field name="sprite" type="Sprite" visibility="public" isTransient="true"/>
+        <Field name="position" type="Vector2" visibility="public"/>
+        <Field name="weapon" type="Weapon" visibility="private" isTransient="true"/>
+        <Field name="jumpHeight" type="float" visibility="public" isTransient="true"/>
+        <Field name="room" type="Room" visibility="package" isTransient="true"/>
+        <Field name="direction" type="Direction" visibility="private" isTransient="true"/>
+        <Field name="jumped" type="boolean" visibility="private" isTransient="true"/>
+        <Field name="isImmortal" type="boolean" visibility="private" isTransient="true"/>
+        <Field name="immortalityEndTime" type="float" visibility="private" isTransient="true"/>
+        <Field name="baseJumpHeight" type="float" visibility="private" isTransient="true"/>
+        <Field name="color" type="Color" visibility="private" isTransient="true"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="int" name="playerID"/>
+          <Argument type="String" name="nickName"/>
+          <Argument type="int" name="lives"/>
+          <Argument type="int" name="moveSpeed"/>
+          <Argument type="Color" name="color"/>
+          <Argument type="Vector2" name="startPosition"/>
+          <Argument type="Room" name="room"/>
+        </Constructor>
+        <Constructor visibility="public">
+          <Argument type="int" name="playerID"/>
+          <Argument type="String" name="nickName"/>
+          <Argument type="int" name="lives"/>
+          <Argument type="int" name="moveSpeed"/>
+          <Argument type="Vector2" name="startPosition"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="setPlayerTexture" returnType="void" visibility="public">
+          <Argument type="Texture" name="value"/>
+        </Method>
+        <Method name="resetJumpheight" returnType="void" visibility="public"/>
+        <Method name="defaultWeapon" returnType="Weapon" visibility="public"/>
+        <Method name="getPlayerId" returnType="int" visibility="public"/>
+        <Method name="getMaxHp" returnType="float" visibility="public"/>
+        <Method name="getMaxLives" returnType="int" visibility="public"/>
+        <Method name="getHp" returnType="float" visibility="public"/>
+        <Method name="reduceHp" returnType="void" visibility="public">
+          <Argument type="int" name="amount"/>
+        </Method>
+        <Method name="hitCollision" returnType="void" visibility="public"/>
+        <Method name="reduceLives" returnType="void" visibility="private"/>
+        <Method name="attackMelee" returnType="boolean" visibility="public"/>
+        <Method name="attackRanged" returnType="boolean" visibility="public">
+          <Argument type="Vector2" name="clickPosition"/>
+        </Method>
+        <Method name="getMoveSpeed" returnType="int" visibility="public"/>
+        <Method name="setMoveSpeed" returnType="void" visibility="public">
+          <Argument type="int" name="speed"/>
+        </Method>
+        <Method name="getIsImmortal" returnType="boolean" visibility="public"/>
+        <Method name="setIsImmortal" returnType="void" visibility="public">
+          <Argument type="boolean" name="value"/>
+        </Method>
+        <Method name="getImmortalityEndTime" returnType="float" visibility="public"/>
+        <Method name="setImmortalityEndTime" returnType="void" visibility="public">
+          <Argument type="float" name="value"/>
+        </Method>
+        <Method name="resetImmortalityEndTime" returnType="void" visibility="public"/>
+        <Method name="resetSpeedBoostEndTime" returnType="void" visibility="public"/>
+        <Method name="setWeapon" returnType="void" visibility="public">
+          <Argument type="Weapon" name="value"/>
+        </Method>
+        <Method name="getWeapon" returnType="Weapon" visibility="public"/>
+        <Method name="checkMovementInput" returnType="void" visibility="public"/>
+        <Method name="getLookVector2" returnType="Vector2" visibility="private"/>
+        <Method name="changeLocation" returnType="void" visibility="public">
+          <Argument type="Vector2" name="moveDiretion"/>
+        </Method>
+        <Method name="getLives" returnType="int" visibility="public"/>
+        <Method name="addLives" returnType="void" visibility="public">
+          <Argument type="int" name="value"/>
+        </Method>
+        <Method name="respawn" returnType="void" visibility="public"/>
+        <Method name="die" returnType="void" visibility="public"/>
+        <Method name="talk" returnType="void" visibility="public">
+          <Argument type="Commando" name="commando"/>
+        </Method>
+        <Method name="getPosition" returnType="Vector2" visibility="public"/>
+        <Method name="getSpeedBoostEndTime" returnType="float" visibility="public"/>
+        <Method name="setSpeedBoostEndTime" returnType="void" visibility="public">
+          <Argument type="float" name="value"/>
+        </Method>
+        <Method name="getXpos" returnType="float" visibility="public"/>
+        <Method name="getYpos" returnType="float" visibility="public"/>
+        <Method name="getUsername" returnType="String" visibility="public"/>
+        <Method name="updatePlayer" returnType="void" visibility="public">
+          <Argument type="float" name="xpos"/>
+          <Argument type="float" name="ypos"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="PlayerUpdate" package="comboman.game" visibility="public" xPosition="5640.0" yPosition="3159.0">
+      <Fields>
+        <Field name="xPos" type="float" visibility="private" isFinal="true"/>
+        <Field name="yPos" type="float" visibility="private" isFinal="true"/>
+        <Field name="playerID" type="int" visibility="private" isFinal="true"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="float" name="xPos"/>
+          <Argument type="float" name="yPos"/>
+          <Argument type="int" name="playerID"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getxPos" returnType="float" visibility="public"/>
+        <Method name="getyPos" returnType="float" visibility="public"/>
+        <Method name="getID" returnType="int" visibility="public"/>
+        <Method name="toString" returnType="String" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="PowerUp" package="comboman.game" visibility="public" isAbstract="true" xPosition="2468.0" yPosition="1893.0">
+      <Fields>
+        <Field name="room" type="Room" visibility="package"/>
+        <Field name="name" type="String" visibility="protected"/>
+        <Field name="duration" type="int" visibility="protected"/>
+        <Field name="startTime" type="float" visibility="protected"/>
+        <Field name="destroyed" type="boolean" visibility="protected"/>
+        <Field name="sprite" type="Sprite" visibility="protected" isTransient="true"/>
+        <Field name="position" type="Vector2" visibility="protected"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="int" name="duration"/>
+          <Argument type="float" name="startTime"/>
+        </Constructor>
+        <Constructor visibility="public">
+          <Argument type="Room" name="room"/>
+          <Argument type="Vector2" name="startPosition"/>
+          <Argument type="Texture" name="texture"/>
+        </Constructor>
+        <Constructor visibility="public">
+          <Argument type="Room" name="room"/>
+          <Argument type="Vector2" name="startPosition"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getName" returnType="String" visibility="public"/>
+        <Method name="use" returnType="boolean" visibility="public" isAbstract="true">
+          <Argument type="Player" name="player"/>
+        </Method>
+        <Method name="draw" returnType="void" visibility="public">
+          <Argument type="Batch" name="batch"/>
+        </Method>
+        <Method name="destroy" returnType="void" visibility="public"/>
+        <Method name="getDestroyed" returnType="boolean" visibility="public"/>
+        <Method name="randomPos" returnType="Vector2" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="Projectile" package="comboman.game" visibility="public" xPosition="7401.0" yPosition="1238.0">
+      <Fields>
+        <Field name="sprite" type="Sprite" visibility="public"/>
+        <Field name="hitTexture" type="Texture" visibility="public"/>
+        <Field name="moveLocation" type="Vector2" visibility="private"/>
+        <Field name="location" type="Vector2" visibility="private"/>
+        <Field name="speedIncrease" type="float" visibility="private"/>
+        <Field name="speed" type="float" visibility="private"/>
+        <Field name="startTime" type="float" visibility="private"/>
+        <Field name="endTime" type="float" visibility="private"/>
+        <Field name="hitSomething" type="boolean" visibility="public"/>
+        <Field name="scaleIncrease" type="float" visibility="private"/>
+        <Field name="resetExplosionSize" type="boolean" visibility="private"/>
+        <Field name="damageOverTime" type="int" visibility="public"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="Vector2" name="moveLocation"/>
+          <Argument type="float" name="speedIncrease"/>
+          <Argument type="Texture" name="textureStart"/>
+          <Argument type="float" name="startTime"/>
+          <Argument type="Vector2" name="startLocation"/>
+          <Argument type="float" name="duration"/>
+          <Argument type="Texture" name="textureEnd"/>
+          <Argument type="float" name="projectileSpeed"/>
+          <Argument type="int" name="damageOverTime"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getLocation" returnType="Vector2" visibility="public"/>
+        <Method name="move" returnType="void" visibility="public"/>
+        <Method name="checkIfEnded" returnType="boolean" visibility="public">
+          <Argument type="float" name="currentTime"/>
+        </Method>
+        <Method name="changeToHitSprite" returnType="void" visibility="public">
+          <Argument type="float" name="currentTime"/>
+          <Argument type="Vector2" name="hitPosition"/>
+        </Method>
+        <Method name="increaseExplosionSize" returnType="void" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="Ranged" package="comboman.game" visibility="public" xPosition="5831.0" yPosition="713.0">
+      <Fields>
+        <Field name="projectileSpeedIncrease" type="float" visibility="private"/>
+        <Field name="projectileTexture" type="Texture" visibility="private"/>
+        <Field name="hitTexture" type="Texture" visibility="private"/>
+        <Field name="projectileDuration" type="float" visibility="private"/>
+        <Field name="projectileSpeed" type="float" visibility="private"/>
+        <Field name="weaponTexture" type="Texture" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="String" name="name"/>
+          <Argument type="int" name="uses"/>
+          <Argument type="int" name="attackspeed"/>
+          <Argument type="Animation" name="animation"/>
+          <Argument type="float" name="projectileSpeedIncrease"/>
+          <Argument type="Texture" name="projectileTexture"/>
+          <Argument type="Texture" name="hitTexture"/>
+          <Argument type="float" name="projectileDuration"/>
+          <Argument type="float" name="currentTime"/>
+          <Argument type="float" name="projectileSpeed"/>
+          <Argument type="int" name="damage"/>
+          <Argument type="Vector2" name="startPosition"/>
+          <Argument type="Texture" name="weaponTexture"/>
+        </Constructor>
+        <Constructor visibility="public">
+          <Argument type="String" name="name"/>
+          <Argument type="int" name="uses"/>
+          <Argument type="int" name="attackspeed"/>
+          <Argument type="Animation" name="animation"/>
+          <Argument type="float" name="projectileSpeedIncrease"/>
+          <Argument type="float" name="projectileDuration"/>
+          <Argument type="float" name="currentTime"/>
+          <Argument type="float" name="projectileSpeed"/>
+          <Argument type="int" name="damage"/>
+          <Argument type="Vector2" name="startPosition"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="rangedAttack" returnType="void" visibility="public">
+          <Argument type="Vector2" name="playerPosition"/>
+          <Argument type="float" name="attackSpeedModifier"/>
+          <Argument type="Vector2" name="moveLocation"/>
+          <Argument type="Room" name="room"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="RegisterException" package="comboman.game" visibility="public" xPosition="164.0" yPosition="2099.0">
+      <Fields/>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="String" name="string"/>
+        </Constructor>
+      </Constructors>
+      <Methods/>
+    </Class>
+    <Class name="Room" package="comboman.game" visibility="public" xPosition="6610.0" yPosition="3339.0">
+      <Fields>
+        <Field name="controller" type="RoomController" visibility="private"/>
+        <Field name="game" type="GameManager" visibility="package"/>
+        <Field name="acPlayer" type="Account" visibility="private"/>
+        <Field name="players" type="List&lt;Player&gt;" visibility="private"/>
+        <Field name="playerpropList" type="List&lt;String&gt;" visibility="private"/>
+        <Field name="map" type="Map" visibility="private"/>
+        <Field name="uiManager" type="UIManager" visibility="package"/>
+        <Field name="batch" type="SpriteBatch" visibility="package"/>
+        <Field name="startTime" type="long" visibility="private"/>
+        <Field name="powerUpList" type="String" visibility="private"/>
+        <Field name="projectiles" type="List&lt;Projectile&gt;" visibility="private"/>
+        <Field name="playersToRemove" type="List&lt;Player&gt;" visibility="private"/>
+        <Field name="powerups" type="List&lt;PowerUp&gt;" visibility="private"/>
+        <Field name="pickups" type="List&lt;PickUp&gt;" visibility="private"/>
+        <Field name="currentProperty" type="String" visibility="private"/>
+        <Field name="properties" type="String[]" visibility="private" isFinal="true"/>
+        <Field name="maxHp" type="int" visibility="private"/>
+        <Field name="playerLives" type="List&lt;List&lt;Sprite&gt;&gt;" visibility="private" isTransient="true"/>
+        <Field name="playerHp" type="List&lt;NinePatch&gt;" visibility="private"/>
+        <Field name="spawnPoints" type="List&lt;Rectangle&gt;" visibility="private"/>
+        <Field name="hpBarWidth" type="float" visibility="private"/>
+        <Field name="objectCollisionLayerId" type="int" visibility="private"/>
+        <Field name="maxPowerUpsPerClass" type="int" visibility="private"/>
+        <Field name="maxPickUpsPerClass" type="int" visibility="private"/>
+        <Field name="startGame" type="boolean" visibility="package"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="GameManager" name="game"/>
+          <Argument type="Account" name="player"/>
+          <Argument type="String" name="publisher"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="create" returnType="void" visibility="public"/>
+        <Method name="addPlayerLives" returnType="void" visibility="private">
+          <Argument type="List&lt;Sprite&gt;" name="playerLives"/>
+          <Argument type="int" name="maxLives"/>
+          <Argument type="int" name="playerNr"/>
+        </Method>
+        <Method name="checkIfSpeedTimeOut" returnType="void" visibility="public"/>
+        <Method name="getSpawnPoint" returnType="Vector2" visibility="public"/>
+        <Method name="calculateAllCollisionObjects" returnType="void" visibility="private"/>
+        <Method name="checkIfImmortalityTimeOut" returnType="void" visibility="public"/>
+        <Method name="getTime" returnType="float" visibility="public"/>
+        <Method name="moveAllProjectiles" returnType="void" visibility="private">
+          <Argument type="Batch" name="batch"/>
+        </Method>
+        <Method name="changeLives" returnType="void" visibility="public">
+          <Argument type="int" name="playerId"/>
+          <Argument type="int" name="newHp"/>
+        </Method>
+        <Method name="removePlayer" returnType="void" visibility="public">
+          <Argument type="Player" name="deathPlayer"/>
+        </Method>
+        <Method name="addProjectile" returnType="void" visibility="public">
+          <Argument type="Projectile" name="projectile"/>
+        </Method>
+        <Method name="checkIfPlayerHitMelee" returnType="void" visibility="public">
+          <Argument type="Vector2" name="player1Position"/>
+          <Argument type="float" name="attackRange"/>
+          <Argument type="Direction" name="direction"/>
+          <Argument type="int" name="playerId"/>
+          <Argument type="int" name="damage"/>
+        </Method>
+        <Method name="movePlayer" returnType="void" visibility="public">
+          <Argument type="Player" name="player"/>
+          <Argument type="Vector2" name="moveTo"/>
+        </Method>
+        <Method name="checkIfPlayerInMap" returnType="void" visibility="private">
+          <Argument type="Player" name="player"/>
+        </Method>
+        <Method name="isHealthPowerUpAvailable" returnType="boolean" visibility="public"/>
+        <Method name="isSpeedPowerUpAvailable" returnType="boolean" visibility="public"/>
+        <Method name="isImmortalityPowerUpAvailable" returnType="boolean" visibility="public"/>
+        <Method name="isRangedPickUpAvailable" returnType="boolean" visibility="public"/>
+        <Method name="isMeleePickUpAvailable" returnType="boolean" visibility="public"/>
+        <Method name="checkIfPickUpPickup" returnType="void" visibility="public"/>
+        <Method name="checkIfPowerupPickup" returnType="void" visibility="public"/>
+        <Method name="checkIfOutOfWeaponUses" returnType="void" visibility="public"/>
+        <Method name="show" returnType="void" visibility="public"/>
+        <Method name="render" returnType="void" visibility="public">
+          <Argument type="float" name="delta"/>
+        </Method>
+        <Method name="hide" returnType="void" visibility="public"/>
+        <Method name="checkNewPlayers" returnType="void" visibility="public"/>
+        <Method name="updatePlayer" returnType="void" visibility="public">
+          <Argument type="String" name="property"/>
+          <Argument type="PlayerUpdate" name="playerUp"/>
+        </Method>
+        <Method name="playerMoved" returnType="void" visibility="public">
+          <Argument type="String" name="property"/>
+          <Argument type="Player" name="player"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="RoomController" package="comboman.game" visibility="public" xPosition="4944.0" yPosition="2325.0">
+      <Fields>
+        <Field name="room" type="Room" visibility="private" isFinal="true"/>
+        <Field name="bindingName" type="String" visibility="private" isStatic="true"/>
+        <Field name="portNumber" type="int" visibility="private" isStatic="true"/>
+        <Field name="publisherForDomain" type="IRemotePublisherForDomain" visibility="private"/>
+        <Field name="publisherForListener" type="IRemotePublisherForListener" visibility="private"/>
+        <Field name="connected" type="boolean" visibility="private"/>
+        <Field name="nrThreads" type="int" visibility="private" isFinal="true"/>
+        <Field name="threadPool" type="ExecutorService" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="Room" name="room"/>
+          <Argument type="String" name="publisher"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="propertyChange" returnType="void" visibility="public">
+          <Argument type="PropertyChangeEvent" name="pce"/>
+        </Method>
+        <Method name="connectToPublisher" returnType="void" visibility="public"/>
+        <Method name="register" returnType="void" visibility="public">
+          <Argument type="String" name="property"/>
+        </Method>
+        <Method name="subscribe" returnType="void" visibility="public">
+          <Argument type="String" name="property"/>
+        </Method>
+        <Method name="unsubscribe" returnType="void" visibility="public">
+          <Argument type="String" name="property"/>
+        </Method>
+        <Method name="broadcast" returnType="void" visibility="public">
+          <Argument type="String" name="property"/>
+          <Argument type="PlayerUpdate" name="playerUp"/>
+        </Method>
+        <Method name="stop" returnType="void" visibility="public"/>
+        <Method name="getRoomListRegistry" returnType="String[]" visibility="public"/>
+        <Method name="getPlayers" returnType="List&lt;String&gt;" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="SpeedBuff" package="comboman.game" visibility="public" xPosition="1090.0" yPosition="2400.0">
+      <Fields>
+        <Field name="name" type="String" visibility="private"/>
+        <Field name="maxSpeedBuff" type="int" visibility="private"/>
+        <Field name="speedBuff" type="int" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="int" name="duration"/>
+          <Argument type="float" name="startTime"/>
+        </Constructor>
+        <Constructor visibility="public">
+          <Argument type="Room" name="room"/>
+          <Argument type="Vector2" name="startPosition"/>
+          <Argument type="Texture" name="texture"/>
+          <Argument type="int" name="speedBuff"/>
+        </Constructor>
+        <Constructor visibility="public">
+          <Argument type="Room" name="room"/>
+          <Argument type="Vector2" name="startPosition"/>
+          <Argument type="int" name="speedBuff"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="use" returnType="boolean" visibility="public">
+          <Argument type="Player" name="player"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Weapon" package="comboman.game" visibility="public" isAbstract="true" xPosition="4317.0" yPosition="411.0">
+      <Fields>
+        <Field name="name" type="String" visibility="private"/>
+        <Field name="usesLeft" type="int" visibility="protected"/>
+        <Field name="damage" type="int" visibility="protected"/>
+        <Field name="attackSpeed" type="int" visibility="protected"/>
+        <Field name="lastAttackTime" type="float" visibility="protected"/>
+        <Field name="animation" type="Animation" visibility="protected"/>
+        <Field name="sprite" type="Sprite" visibility="protected"/>
+        <Field name="position" type="Vector2" visibility="protected"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="String" name="name"/>
+          <Argument type="int" name="usesLeft"/>
+          <Argument type="int" name="attackspeed"/>
+          <Argument type="Animation" name="animation"/>
+          <Argument type="float" name="currentTime"/>
+          <Argument type="int" name="damage"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="setPosition" returnType="void" visibility="public">
+          <Argument type="Vector2" name="value"/>
+        </Method>
+        <Method name="getSprite" returnType="Sprite" visibility="public"/>
+        <Method name="getName" returnType="String" visibility="public"/>
+        <Method name="pickUp" returnType="void" visibility="public">
+          <Argument type="Player" name="player"/>
+        </Method>
+        <Method name="getPosition" returnType="Vector2" visibility="public"/>
+        <Method name="getUsesLeft" returnType="int" visibility="public"/>
+      </Methods>
+    </Class>
+    <Interface name="IPlayer" package="comboman.game" visibility="public" xPosition="306.0" yPosition="2529.0">
+      <Methods>
+        <Method name="getXpos" returnType="double" visibility="public"/>
+        <Method name="getYpos" returnType="double" visibility="public"/>
+        <Method name="getUsername" returnType="String" visibility="public"/>
+        <Method name="getID" returnType="int" visibility="public"/>
+      </Methods>
+    </Interface>
+    <Interface name="IRMIUpdate" package="comboman.game" visibility="public" xPosition="799.0" yPosition="1877.0">
+      <Methods>
+        <Method name="getPlayers" returnType="ArrayList&lt;IPlayer&gt;" visibility="public"/>
+      </Methods>
+    </Interface>
+    <Interface name="IRoom" package="comboman.game" visibility="public" xPosition="5053.0" yPosition="3128.0">
+      <Methods>
+        <Method name="getPlayers" returnType="ArrayList&lt;Player&gt;" visibility="public"/>
+        <Method name="joinGame" returnType="void" visibility="public">
+          <Argument type="Account" name="player"/>
+        </Method>
+      </Methods>
+    </Interface>
+    <Enum name="Collision" package="comboman.game" visibility="public" xPosition="225.0" yPosition="2297.0">
+      <Literals>
+        <Literal name="PLATFORMCOLLISION"/>
+        <Literal name="FULLCOLLISION"/>
+        <Literal name="NOCOLLISION"/>
+      </Literals>
+    </Enum>
+    <Enum name="Commando" package="comboman.game" visibility="public" xPosition="1793.0" yPosition="2671.0">
+      <Literals>
+        <Literal name="GG"/>
+        <Literal name="Niceshot"/>
+        <Literal name="RIP"/>
+      </Literals>
+    </Enum>
+    <Enum name="Direction" package="comboman.game" visibility="public" xPosition="3864.0" yPosition="3504.0">
+      <Literals>
+        <Literal name="NORTH"/>
+        <Literal name="NORTHEAST"/>
+        <Literal name="EAST"/>
+        <Literal name="SOUTHEAST"/>
+        <Literal name="SOUTH"/>
+        <Literal name="SOUTHWEST"/>
+        <Literal name="WEST"/>
+        <Literal name="NORTHWEST"/>
+      </Literals>
+    </Enum>
+    <Enum name="State" package="comboman.game" visibility="public" xPosition="189.0" yPosition="1390.0">
+      <Literals>
+        <Literal name="Started"/>
+        <Literal name="Lobby"/>
+        <Literal name="Finished"/>
+        <Literal name="Starting"/>
+      </Literals>
+    </Enum>
+    <Enum name="Team" package="comboman.game" visibility="public" xPosition="2210.0" yPosition="2640.0">
+      <Literals>
+        <Literal name="BLUE"/>
+        <Literal name="RED"/>
+      </Literals>
+    </Enum>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations>
+    <UseRelation source="comboman.game.Player" target="comboman.game.Commando" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="comboman.game.Player" target="comboman.game.Weapon" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="comboman.game.Weapon" target="comboman.game.Player" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="rooms" source="comboman.game.GameManager" target="comboman.game.Room" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="ArrayList&lt;Room&gt;"/>
+    <HasRelation name="rooms" source="comboman.game.Game" target="comboman.game.Room" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="ArrayList&lt;Room&gt;"/>
+    <UseRelation source="comboman.game.Room" target="comboman.game.PlayerUpdate" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="comboman.game.IRoom" target="comboman.game.Player" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="direction" source="comboman.game.Player" target="comboman.game.Direction" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="users" source="comboman.game.Game" target="comboman.game.Account" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="ArrayList&lt;Account&gt;"/>
+    <UseRelation source="comboman.game.IRoom" target="comboman.game.Account" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="room" source="comboman.game.Player" target="comboman.game.Room" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="users" source="comboman.game.GameManager" target="comboman.game.Account" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="ArrayList&lt;Account&gt;"/>
+    <UseRelation source="comboman.game.GameManager" target="comboman.game.Game" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="map" source="comboman.game.Room" target="comboman.game.Map" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="Map"/>
+    <IsRelation name="is" source="comboman.game.OneUp" target="comboman.game.PowerUp"/>
+    <HasRelation name="projectiles" source="comboman.game.Room" target="comboman.game.Projectile" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="List&lt;Projectile&gt;"/>
+    <IsRelation name="is" source="comboman.game.Ranged" target="comboman.game.Weapon"/>
+    <HasRelation name="powerups" source="comboman.game.Room" target="comboman.game.PowerUp" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="List&lt;PowerUp&gt;"/>
+    <HasRelation name="powerup" source="comboman.game.Player" target="comboman.game.PowerUp" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="ArrayList&lt;PowerUp&gt;"/>
+    <UseRelation source="comboman.game.Ranged" target="comboman.game.Room" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="comboman.game.Melee" target="comboman.game.Weapon"/>
+    <HasRelation name="weapon" source="comboman.game.PickUp" target="comboman.game.Weapon" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="controller" source="comboman.game.Room" target="comboman.game.RoomController" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="comboman.game.Room" target="comboman.game.Direction" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="weapon" source="comboman.game.Player" target="comboman.game.Weapon" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="comboman.game.GameManager" target="comboman.game.Game"/>
+    <IsRelation name="is" source="comboman.game.Login" target="comboman.game.Game"/>
+    <HasRelation name="pickups" source="comboman.game.Room" target="comboman.game.PickUp" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="List&lt;PickUp&gt;"/>
+    <HasRelation name="room" source="comboman.game.RoomController" target="comboman.game.Room" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="comboman.game.RoomController" target="comboman.game.PlayerUpdate" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="players" source="comboman.game.Room" target="comboman.game.Player" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="List&lt;Player&gt;"/>
+    <HasRelation name="team" source="comboman.game.Player" target="comboman.game.Team" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="comboman.game.PickUp" target="comboman.game.Weapon" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="comboman.game.SpeedBuff" target="comboman.game.Player" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="comboman.game.SpeedBuff" target="comboman.game.PowerUp"/>
+    <UseRelation source="comboman.game.Game" target="comboman.game.Game" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="room" source="comboman.game.PickUp" target="comboman.game.Room" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="comboman.game.PowerUp" target="comboman.game.Player" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="game" source="comboman.game.Room" target="comboman.game.GameManager" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="comboman.game.Room" target="comboman.game.Player" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="comboman.game.Room" target="comboman.game.Projectile" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="room" source="comboman.game.Map" target="comboman.game.Room" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="comboman.game.IRMIUpdate" target="comboman.game.Player" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="room" source="comboman.game.PowerUp" target="comboman.game.Room" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="game" source="comboman.game.Account" target="comboman.game.GameManager" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="comboman.game.OneUp" target="comboman.game.Player" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="acPlayer" source="comboman.game.Room" target="comboman.game.Account" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="playersToRemove" source="comboman.game.Room" target="comboman.game.Player" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="List&lt;Player&gt;"/>
+    <UseRelation source="comboman.game.PickUp" target="comboman.game.Player" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="comboman.game.AttackBuff" target="comboman.game.PowerUp"/>
+    <UseRelation source="comboman.game.Melee" target="comboman.game.Room" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="comboman.game.AttackBuff" target="comboman.game.Player" sourceCardinality="1..1" targetCardinality="1..1"/>
+  </ClassDiagramRelations>
+</ClassDiagram>

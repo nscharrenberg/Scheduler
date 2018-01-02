@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXDrawer?>
+<?import com.jfoenix.controls.JFXToolbar?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="412.0" prefWidth="556.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="scheduler.application.SchedulerApplicationController">
+    <children>
+      <BorderPane fx:id="borderPane" layoutX="57.0" layoutY="23.0" prefHeight="412.0" prefWidth="556.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <top>
+            <JFXToolbar fx:id="toolbarMenu" prefHeight="30.0" prefWidth="556.0" BorderPane.alignment="CENTER">
+               <top>
+                  <MenuBar BorderPane.alignment="CENTER">
+                    <menus>
+                      <Menu mnemonicParsing="false" text="New">
+                        <items>
+                          <MenuItem fx:id="newProjectBtn" mnemonicParsing="false" onAction="#newProjectAction" text="Project" />
+                        </items>
+                      </Menu>
+                      <Menu mnemonicParsing="false" text="Overview">
+                        <items>
+                          <MenuItem fx:id="personalProjectsBtn" mnemonicParsing="false" onAction="#personalProjectsAction" text="Personal Projects" />
+                              <MenuItem fx:id="groupProjectsBtn" mnemonicParsing="false" onAction="#groupProjectsAction" text="Group Projects" />
+                        </items>
+                      </Menu>
+                      <Menu mnemonicParsing="false" text="Help">
+                        <items>
+                          <MenuItem fx:id="settingsBtn" mnemonicParsing="false" onAction="#settingsAction" text="Settings" />
+                        </items>
+                      </Menu>
+                    </menus>
+                  </MenuBar>
+               </top>
+            </JFXToolbar>
+         </top>
+         <center>
+            <JFXDrawer fx:id="drawerFrame" defaultDrawerSize="556.0" prefHeight="363.0" prefWidth="556.0" resizableOnDrag="true" style="-fx-background-color: #fff;" BorderPane.alignment="CENTER" />
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>
