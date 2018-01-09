@@ -24,3 +24,6 @@ hs_err_pid*
 /Scheduler Application/dist/
 /Scheduler Application/build/
 /KochFractal - Server/nbproject/private/
+/SchedulerApplicationServer/nbproject/private/
+/SchedulerApplicationServer12/nbproject/private/
+/SchedulerApplicationServer/build/

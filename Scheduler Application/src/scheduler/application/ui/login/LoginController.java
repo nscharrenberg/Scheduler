@@ -24,8 +24,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import scheduler.application.dal.mysql.AccountMySQLDao;
-import scheduler.application.dal.repository.AccountRepository;
+import scheduler.application.RegistryManager;
+import scheduler.application.model.Account;
+import scheduler.application.rmi.interfaces.IVisitor;
 
 /**
  * FXML Controller class
@@ -34,8 +35,9 @@ import scheduler.application.dal.repository.AccountRepository;
  */
 public class LoginController implements Initializable {
     
-    static AccountMySQLDao accountDao = new AccountMySQLDao();
-    AccountRepository ar = new AccountRepository(accountDao);
+    private RegistryManager rm;
+    private Account account;
+    private IVisitor visitor;
     
     @FXML
     private AnchorPane anchorPane;
@@ -63,7 +65,9 @@ public class LoginController implements Initializable {
     @FXML
     void loginAction(MouseEvent event) {
         try {
-            if(ar.login(usernameTxt.getText(), passwordTxt.getText()) != null) {
+            account = visitor.login(usernameTxt.getText(), passwordTxt.getText());
+            
+            if(account != null) {
                 Parent root = FXMLLoader.load(getClass().getResource("/scheduler/application/ui/personalProjects/personalProjects.fxml"));
                 Scene scene = new Scene(root);
                 Stage stage = new Stage();
@@ -95,14 +99,21 @@ public class LoginController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        // Instantiate RegistryManager
+        rm = new RegistryManager();
+        
+        // Get the Visitor Interface
+        rm.getIVisitor();
+        
+        // Get Visitor
+        visitor = rm.getVisitor();
     }    
     
     private void closeCurrentStageThroughJFXButton(MouseEvent event) {
         ((Stage)(((JFXButton)event.getSource()).getScene().getWindow())).close();
     }
     
-    private void openSnackbar(String msg, Pane pane, String btnTxt, int longtime) {
+    public void openSnackbar(String msg, Pane pane, String btnTxt, int longtime) {
         JFXSnackbar notification = new JFXSnackbar(pane);
         EventHandler eh = new EventHandler() {
             @Override

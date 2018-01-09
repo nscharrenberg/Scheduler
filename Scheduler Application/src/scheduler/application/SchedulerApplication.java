@@ -22,6 +22,7 @@ public class SchedulerApplication extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("/scheduler/application/ui/login/login.fxml"));
         Scene scene = new Scene(root);
         stage.setScene(scene);
+        stage.setTitle("Scheduler Application");
         stage.show();
     }
 

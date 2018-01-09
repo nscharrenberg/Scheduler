@@ -28,8 +28,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import scheduler.application.dal.mysql.AccountMySQLDao;
-import scheduler.application.dal.repository.AccountRepository;
+import scheduler.application.RegistryManager;
+import scheduler.application.rmi.interfaces.IVisitor;
 
 /**
  * FXML Controller class
@@ -38,8 +38,8 @@ import scheduler.application.dal.repository.AccountRepository;
  */
 public class RegisterController implements Initializable {
     
-    static AccountMySQLDao accountDao = new AccountMySQLDao();
-    AccountRepository ar = new AccountRepository(accountDao);
+    private RegistryManager rm;
+    private IVisitor visitor;
     
     @FXML
     private AnchorPane anchorPane;
@@ -73,7 +73,7 @@ public class RegisterController implements Initializable {
     @FXML
     void registerAction(MouseEvent event) {
         try {
-            if(ar.register(usernameTxt.getText(), emailTxt.getText(), passwordTxt.getText(), confPasswordTxt.getText())) {
+            if(visitor.register(usernameTxt.getText(), emailTxt.getText(), passwordTxt.getText(), confPasswordTxt.getText())) {
                 Parent root = FXMLLoader.load(getClass().getResource("/scheduler/application/ui/personalProjects/personalProjects.fxml"));
                 Scene scene = new Scene(root);
                 Stage stage = new Stage();
@@ -91,8 +91,15 @@ public class RegisterController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        // Instantiate RegistryManager
+        rm = new RegistryManager();
         
-    }  
+        // Get the Visitor Interface
+        rm.getIVisitor();
+        
+        // Get Visitor
+        visitor = rm.getVisitor();
+    }
     
     private void closeCurrentStageThroughJFXButton(MouseEvent event) {
         ((Stage)(((JFXButton)event.getSource()).getScene().getWindow())).close();
