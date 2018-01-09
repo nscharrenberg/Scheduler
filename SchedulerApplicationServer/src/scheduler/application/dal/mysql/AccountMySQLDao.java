@@ -95,4 +95,9 @@ public class AccountMySQLDao implements IAccountInterface {
         
         return account;
     }
+
+    @Override
+    public void logout(int userId) throws SQLException, Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

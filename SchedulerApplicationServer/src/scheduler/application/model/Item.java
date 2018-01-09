@@ -5,11 +5,13 @@
  */
 package scheduler.application.model;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Noah Scharrenberg
  */
-public abstract class Item {
+public abstract class Item implements Serializable {
     private int id;
     private String name;
     private String description;

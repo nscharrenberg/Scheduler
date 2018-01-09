@@ -5,6 +5,7 @@
  */
 package scheduler.application.model;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -12,7 +13,7 @@ import java.util.List;
  *
  * @author Noah Scharrenberg
  */
-public abstract class Schedule {
+public abstract class Schedule implements Serializable {
     private int id;
     private Account owner;
     private String name;

@@ -27,6 +27,7 @@ import javafx.stage.Stage;
 import scheduler.application.RegistryManager;
 import scheduler.application.model.Account;
 import scheduler.application.rmi.interfaces.IVisitor;
+import scheduler.application.ui.personalProjects.personalProjectsController;
 
 /**
  * FXML Controller class
@@ -40,7 +41,7 @@ public class LoginController implements Initializable {
     private IVisitor visitor;
     
     @FXML
-    private AnchorPane anchorPane;
+    public AnchorPane anchorPane;
     
     @FXML
     private JFXTextField usernameTxt;
@@ -68,10 +69,15 @@ public class LoginController implements Initializable {
             account = visitor.login(usernameTxt.getText(), passwordTxt.getText());
             
             if(account != null) {
-                Parent root = FXMLLoader.load(getClass().getResource("/scheduler/application/ui/personalProjects/personalProjects.fxml"));
+                rm.setAccount(account);
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/scheduler/application/ui/personalProjects/personalProjects.fxml"));
+                Parent root = loader.load();
+                personalProjectsController controller = (personalProjectsController) loader.getController();
+                controller.setup(rm);
                 Scene scene = new Scene(root);
                 Stage stage = new Stage();
                 stage.setScene(scene);
+                stage.setTitle("Scheduler - Personal Projects");
                 stage.show();
                 closeCurrentStageThroughJFXButton(event);
             }

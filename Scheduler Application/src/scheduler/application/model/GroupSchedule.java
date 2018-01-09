@@ -5,6 +5,7 @@
  */
 package scheduler.application.model;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -12,7 +13,7 @@ import java.util.List;
  *
  * @author Noah Scharrenberg
  */
-public class GroupSchedule extends Schedule {
+public class GroupSchedule extends Schedule implements Serializable {
     private List<Account> members;
     private List<Account> writers;
     

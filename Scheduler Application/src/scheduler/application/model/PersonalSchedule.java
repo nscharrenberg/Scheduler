@@ -5,13 +5,14 @@
  */
 package scheduler.application.model;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 
 /**
  *
  * @author Noah Scharrenberg
  */
-public class PersonalSchedule extends Schedule {
+public class PersonalSchedule extends Schedule implements Serializable {
     
     public PersonalSchedule(int id, Account owner, String name, Timestamp createdAt) {
         super(id, owner, name, createdAt);

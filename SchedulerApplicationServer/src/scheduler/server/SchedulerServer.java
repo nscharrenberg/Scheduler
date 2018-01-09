@@ -11,7 +11,9 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.List;
 import scheduler.application.dal.mysql.AccountMySQLDao;
+import scheduler.application.dal.mysql.PersonalScheduleMySQLDao;
 import scheduler.application.dal.repository.AccountRepository;
+import scheduler.application.dal.repository.PersonalScheduleRepository;
 import scheduler.application.model.Account;
 import scheduler.application.model.GroupSchedule;
 import scheduler.application.model.PersonalSchedule;
@@ -31,9 +33,16 @@ public class SchedulerServer extends UnicastRemoteObject implements IUser, IVisi
     static AccountMySQLDao accountDao;
     AccountRepository ar;
     
+    // PersonalSchedule DAO
+    static PersonalScheduleMySQLDao personalDao;
+    PersonalScheduleRepository pr;
+    
     public SchedulerServer() throws RemoteException {
         accountDao = new AccountMySQLDao();
         ar = new AccountRepository(accountDao);
+        
+        personalDao = new PersonalScheduleMySQLDao();
+        pr = new PersonalScheduleRepository(personalDao);
     }
 
     @Override
@@ -52,8 +61,8 @@ public class SchedulerServer extends UnicastRemoteObject implements IUser, IVisi
     }
 
     @Override
-    public boolean addPersonalSchedule(Account owner, String name) throws RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean addPersonalSchedule(Account owner, String name) throws RemoteException, SQLException, Exception {
+        return pr.addPersonalSchedule(owner, name);
     }
 
     @Override
@@ -143,6 +152,11 @@ public class SchedulerServer extends UnicastRemoteObject implements IUser, IVisi
 
     @Override
     public boolean deleteSchedule(int scheduleId) throws RemoteException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean deletePersonalSchedule(int scheduleId) throws RemoteException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

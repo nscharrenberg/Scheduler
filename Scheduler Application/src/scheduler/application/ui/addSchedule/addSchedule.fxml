@@ -1,11 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXToggleButton?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111" fx:controller="scheduler.application.ui.addSchedule.AddScheduleController">
+<AnchorPane id="AnchorPane" fx:id="anchorPane" prefHeight="296.0" prefWidth="600.0" stylesheets="@../../assets/css/snackbarStyles.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="scheduler.application.ui.addSchedule.AddScheduleController">
    <children>
-      <Label layoutX="14.0" layoutY="24.0" prefHeight="169.0" prefWidth="202.0" text="Label" textFill="RED" />
+      <VBox alignment="TOP_CENTER" prefHeight="516.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label text="Create Schedule">
+               <font>
+                  <Font name="System Bold" size="36.0" />
+               </font>
+            </Label>
+            <JFXTextField fx:id="nameTxt" promptText="Name">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="20.0" right="20.0" top="20.0" />
+               </VBox.margin>
+            </JFXTextField>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <JFXToggleButton fx:id="groupToggle" prefHeight="100.0" prefWidth="175.0" text="Group Schedule" />
+               </children>
+            </HBox>
+            <JFXButton fx:id="submitBtn" onAction="#saveAction" prefHeight="88.0" prefWidth="600.0" ripplerFill="#ffa67a" style="-fx-background-color: #ff5500;" text="Create Schedule" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </JFXButton>
+         </children>
+      </VBox>
    </children>
 </AnchorPane>

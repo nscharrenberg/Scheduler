@@ -74,7 +74,10 @@ public class RegisterController implements Initializable {
     void registerAction(MouseEvent event) {
         try {
             if(visitor.register(usernameTxt.getText(), emailTxt.getText(), passwordTxt.getText(), confPasswordTxt.getText())) {
-                Parent root = FXMLLoader.load(getClass().getResource("/scheduler/application/ui/personalProjects/personalProjects.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/scheduler/application/ui/login/login.fxml"));
+                Parent root = loader.load();
+                LoginController controller = (LoginController) loader.getController();
+                controller.openSnackbar("Account created! Please Login...", controller.anchorPane, "Close", 10000);
                 Scene scene = new Scene(root);
                 Stage stage = new Stage();
                 stage.setScene(scene);

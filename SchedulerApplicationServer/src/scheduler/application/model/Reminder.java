@@ -5,13 +5,14 @@
  */
 package scheduler.application.model;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 
 /**
  *
  * @author Noah Scharrenberg
  */
-public class Reminder extends Item {
+public class Reminder extends Item implements Serializable {
     private Timestamp startTime;
     private Timestamp endTime;
 
