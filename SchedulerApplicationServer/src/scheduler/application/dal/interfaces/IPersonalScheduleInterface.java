@@ -8,7 +8,9 @@ package scheduler.application.dal.interfaces;
 import java.rmi.RemoteException;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.List;
 import scheduler.application.model.Account;
+import scheduler.application.model.PersonalSchedule;
 
 /**
  *
@@ -16,7 +18,8 @@ import scheduler.application.model.Account;
  */
 public interface IPersonalScheduleInterface {
     boolean addPersonalSchedule(Account owner, String name) throws SQLException, Exception;
-    boolean addPersonalTask(String name, String description, Timestamp deadline) throws SQLException, Exception;
-    boolean addPersonalReminder(String name, String description, Timestamp startTime, Timestamp endTime) throws SQLException, Exception;
+    boolean addPersonalTask(String name, String description, Timestamp deadline, int schedule) throws SQLException, Exception;
+    boolean addPersonalReminder(String name, String description, Timestamp startTime, Timestamp endTime, int schedule) throws SQLException, Exception;
     boolean deletePersonalSchedule(int scheduleId) throws SQLException, Exception;
+    List<PersonalSchedule> getPersonalSchedules(Account user) throws SQLException, Exception;
 }

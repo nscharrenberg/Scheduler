@@ -57,6 +57,7 @@ public class AddScheduleController implements Initializable {
     void saveAction(ActionEvent event) {
         try {
             if(!groupToggle.isSelected()) {
+                System.out.println("Account Add: " + rm.getAccount());
                 if(user.addPersonalSchedule(rm.getAccount(), nameTxt.getText())) {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/scheduler/application/ui/personalProjects/personalProjects.fxml"));
                     Parent root = loader.load();

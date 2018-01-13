@@ -46,17 +46,18 @@ public class SchedulerServer extends UnicastRemoteObject implements IUser, IVisi
     }
 
     @Override
-    public PersonalSchedule getPersonalSchedule(int scheduleId) throws RemoteException {
+    public PersonalSchedule getPersonalSchedule(Account user) throws RemoteException, SQLException, Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public List<PersonalSchedule> getPersonalSchedules(int userId) throws RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<PersonalSchedule> getPersonalSchedules(Account user) throws RemoteException, SQLException, Exception {
+        System.out.println("hit SchedulerServer?");
+        return pr.getPersonalSchedules(user);
     }
 
     @Override
-    public List<GroupSchedule> getGroupSchedules(int userId) throws RemoteException {
+    public List<GroupSchedule> getGroupSchedules(Account user) throws RemoteException, SQLException, Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -70,15 +71,6 @@ public class SchedulerServer extends UnicastRemoteObject implements IUser, IVisi
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public boolean addPersonalTask(String name, String description, Timestamp deadline) throws RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public boolean addPersonalReminder(String name, String description, Timestamp startTime, Timestamp endTime) throws RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
     @Override
     public void logout(int userId) throws RemoteException {
@@ -156,8 +148,18 @@ public class SchedulerServer extends UnicastRemoteObject implements IUser, IVisi
     }
 
     @Override
-    public boolean deletePersonalSchedule(int scheduleId) throws RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean addPersonalTask(String name, String description, Timestamp deadline, int schedule) throws RemoteException, SQLException, Exception {
+        return pr.addPersonalTask(name, description, deadline, schedule);
+    }
+
+    @Override
+    public boolean addPersonalReminder(String name, String description, Timestamp startTime, Timestamp endTime, int schedule) throws RemoteException, SQLException, Exception {
+        return pr.addPersonalReminder(name, description, startTime, endTime, schedule);
+    }
+
+    @Override
+    public boolean deletePersonalSchedule(int scheduleId) throws RemoteException, SQLException, Exception {
+        return pr.deletePersonalSchedule(scheduleId);
     }
     
 }

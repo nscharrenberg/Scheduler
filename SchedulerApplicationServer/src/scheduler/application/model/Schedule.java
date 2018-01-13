@@ -39,7 +39,7 @@ public abstract class Schedule implements Serializable {
         return this.id;
     }
     
-    public Account getAccount() {
+    public Account getOwner() {
        return this.owner;
     }
     

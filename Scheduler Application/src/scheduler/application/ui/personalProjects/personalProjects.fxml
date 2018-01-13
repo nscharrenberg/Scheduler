@@ -1,14 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="anchorPane" prefHeight="498.0" prefWidth="869.0" stylesheets="@../../assets/css/snackbarStyles.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="scheduler.application.ui.personalProjects.personalProjectsController">
+<AnchorPane id="AnchorPane" fx:id="anchorPane" prefHeight="546.0" prefWidth="869.0" stylesheets="@../../assets/css/snackbarStyles.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="scheduler.application.ui.personalProjects.personalProjectsController">
    <children>
-      <JFXButton fx:id="addPersonalScheduleBtn" layoutX="635.0" layoutY="14.0" onAction="#createScheduleAction" prefHeight="55.0" prefWidth="220.0" ripplerFill="#ff9560" style="-fx-background-color: #ff5500;" text="Create Personal Schedule" textFill="WHITE">
+      <JFXButton fx:id="addPersonalScheduleBtn" layoutX="651.0" layoutY="14.0" onAction="#createScheduleAction" prefHeight="36.0" prefWidth="204.0" ripplerFill="#ff9560" style="-fx-background-color: #ff5500;" text="Create Personal Schedule" textFill="WHITE">
          <font>
             <Font name="System Bold" size="14.0" />
          </font></JFXButton>
+      <TableView fx:id="scheduleTables" layoutX="12.0" layoutY="60.0" prefHeight="427.0" prefWidth="846.0">
+        <columns>
+          <TableColumn prefWidth="75.0" text="C1" />
+          <TableColumn prefWidth="75.0" text="C2" />
+        </columns>
+      </TableView>
    </children>
 </AnchorPane>

@@ -33,4 +33,9 @@ public class SchedulerApplication extends Application {
         launch(args);
     }
     
+    @Override
+    public void stop() {
+        
+    }
+    
 }
