@@ -63,6 +63,34 @@ public class AccountMySQLDao implements IAccountInterface {
                 throw new Exception("A field cannot be empty!");
             }
     }
+    
+    @Override
+    public Account findUserByUsername(String username) throws SQLException, Exception {
+        Account account = null;
+        try {
+            conn.getConnection();
+            sqlConn = conn.getConn();
+
+            pstmt = sqlConn.prepareStatement(GET_USER_FROM_USERNAME);
+            pstmt.setString(1, username);
+
+            rs = pstmt.executeQuery();
+            rs.next();
+        
+            int uid = rs.getInt("id");
+            String un = rs.getString("username");
+            String ue = rs.getString("email");
+
+            account = new Account(uid, un, ue);
+        } catch(SQLException e) {
+            throw new Exception("Incorrect username and/or password");
+        } finally {
+            conn.closeConnection();
+        }
+        
+        
+        return account;
+    }
 
     @Override
     public Account login(String username, String password) throws SQLException, Exception {

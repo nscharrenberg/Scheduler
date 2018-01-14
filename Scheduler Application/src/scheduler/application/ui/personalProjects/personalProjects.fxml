@@ -18,5 +18,10 @@
           <TableColumn prefWidth="75.0" text="C2" />
         </columns>
       </TableView>
+      <JFXButton fx:id="openGroupScheduleBtn" layoutX="14.0" layoutY="14.0" onAction="#openGroupSchedulesAction" prefHeight="36.0" prefWidth="628.0" ripplerFill="#6caed7" style="-fx-background-color: #3498db;" text="Group Schedules" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </JFXButton>
    </children>
 </AnchorPane>

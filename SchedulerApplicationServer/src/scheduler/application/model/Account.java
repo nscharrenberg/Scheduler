@@ -16,7 +16,7 @@ public class Account implements Serializable {
     private int id;
     private String username;
     private String email;
-    private String password;
+    private String password = null;
     
     private List<PersonalSchedule> personalSchedules;
     private List<GroupSchedule> groupSchedules;
@@ -26,6 +26,12 @@ public class Account implements Serializable {
         this.username = username;
         this.email = email;
         this.password = password;
+    }
+    
+    public Account(int id, String username, String email) {
+        this.id = id;
+        this.username = username;
+        this.email = email;
     }
     
     public int getId() {

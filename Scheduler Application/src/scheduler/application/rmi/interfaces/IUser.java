@@ -28,4 +28,5 @@ public interface IUser extends Remote {
     void logout(int userId) throws RemoteException, SQLException, Exception;
     boolean deletePersonalSchedule(int scheduleId) throws RemoteException, SQLException, Exception;
     PersonalSchedule getPersonalSchedule(Account user, int scheduleId) throws RemoteException, SQLException, Exception;
+    Account findUserByUsername(String username) throws SQLException, Exception;
 }

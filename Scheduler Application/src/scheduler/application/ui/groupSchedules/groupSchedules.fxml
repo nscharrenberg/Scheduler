@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+
+<StackPane id="anchorPane" fx:id="anchorPane" prefHeight="546.0" prefWidth="869.0" stylesheets="@../../assets/css/snackbarStyles.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="scheduler.application.ui.groupSchedules.GroupSchedulesController">
+   <children>
+      <BorderPane prefHeight="200.0" prefWidth="200.0">
+         <top>
+            <JFXButton fx:id="addPersonalScheduleBtn" onAction="#createScheduleAction" prefHeight="36.0" prefWidth="891.0" ripplerFill="#ff9560" style="-fx-background-color: #ff5500;" text="Create Personal Schedule" textFill="WHITE" BorderPane.alignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </JFXButton>
+         </top>
+         <center>
+            <TableView fx:id="scheduleTables" prefHeight="427.0" prefWidth="846.0" BorderPane.alignment="CENTER">
+               <columns>
+                  <TableColumn prefWidth="75.0" text="C1" />
+                  <TableColumn prefWidth="75.0" text="C2" />
+               </columns>
+            </TableView>
+         </center>
+      </BorderPane>
+   </children>
+</StackPane>

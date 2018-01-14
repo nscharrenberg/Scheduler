@@ -16,4 +16,5 @@ public interface IAccountInterface {
     boolean register(String username, String email, String password, String confPassword) throws SQLException, Exception;
     Account login(String username, String password) throws SQLException, Exception;
     void logout(int userId) throws SQLException, Exception;
+    Account findUserByUsername(String username) throws SQLException, Exception;
 }

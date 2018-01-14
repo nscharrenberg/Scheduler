@@ -62,7 +62,7 @@ public class SchedulerServer extends UnicastRemoteObject implements IUser, IVisi
 
     @Override
     public List<GroupSchedule> getGroupSchedules(Account user) throws RemoteException, SQLException, Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return pr.getGroupSchedules(user);
     }
 
     @Override
@@ -72,7 +72,7 @@ public class SchedulerServer extends UnicastRemoteObject implements IUser, IVisi
 
     @Override
     public boolean addGroupSchedule(Account owner, String name) throws RemoteException, SQLException, Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return pr.addGroupSchedule(owner, name);
     }
 
     @Override
@@ -111,8 +111,8 @@ public class SchedulerServer extends UnicastRemoteObject implements IUser, IVisi
     }
 
     @Override
-    public GroupSchedule getGroupSchedule(int scheduleId) throws RemoteException, SQLException, Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public GroupSchedule getGroupSchedule(Account user, int scheduleId) throws RemoteException, SQLException, Exception {
+        return pr.getGroupSchedule(user, scheduleId);
     }
 
     @Override
@@ -179,6 +179,16 @@ public class SchedulerServer extends UnicastRemoteObject implements IUser, IVisi
     @Override
     public boolean deleteSchedule(int scheduleId) throws RemoteException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Account findUserByUsername(String username) throws SQLException, Exception {
+        return ar.findUserByUsername(username);
+    }
+
+    @Override
+    public boolean addMember(String username, int schedule, boolean writer) throws SQLException, Exception {
+        return pr.addMember(username, schedule, writer);
     }
 
     

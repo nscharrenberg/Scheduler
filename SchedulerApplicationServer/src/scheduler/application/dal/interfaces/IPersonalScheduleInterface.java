@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.List;
 import scheduler.application.model.Account;
+import scheduler.application.model.GroupSchedule;
 import scheduler.application.model.PersonalSchedule;
 
 /**
@@ -23,4 +24,9 @@ public interface IPersonalScheduleInterface {
     boolean deletePersonalSchedule(int scheduleId) throws SQLException, Exception;
     List<PersonalSchedule> getPersonalSchedules(Account user) throws SQLException, Exception;
     PersonalSchedule getPersonalSchedule(Account user, int scheduleId) throws SQLException, Exception;
+    boolean addGroupSchedule(Account owner, String name) throws SQLException, Exception;
+    List<GroupSchedule> getGroupSchedules(Account user) throws SQLException, Exception;
+    GroupSchedule getGroupSchedule(Account user, int scheduleId) throws SQLException, Exception;
+    boolean addMember(String username, int schedule, boolean writer) throws SQLException, Exception;
+    boolean isAlreadyAdded(int user, int schedule) throws SQLException, Exception;
 }

@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package scheduler.application.ui.personalProjects.view;
+package scheduler.application.ui.groupSchedules.view;
 
+import scheduler.application.ui.personalProjects.view.*;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXDialog;
@@ -58,7 +59,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import scheduler.application.RegistryManager;
-import scheduler.application.model.PersonalSchedule;
+import scheduler.application.model.GroupSchedule;
 import scheduler.application.model.Reminder;
 import scheduler.application.model.Task;
 import scheduler.application.rmi.interfaces.IReadSchedule;
@@ -70,11 +71,11 @@ import scheduler.application.ui.personalProjects.personalProjectsController;
  *
  * @author Noah Scharrenberg
  */
-public class ViewScheduleController implements Initializable {
+public class ViewGroupScheduleController implements Initializable {
     private RegistryManager rm;
     private IUser user;
     private IReadSchedule read;
-    private PersonalSchedule schedule;
+    private GroupSchedule schedule;
     
     private Timer timer = null;
     
@@ -89,6 +90,12 @@ public class ViewScheduleController implements Initializable {
 
     @FXML
     private ImageView reminderBtn;
+    
+    @FXML
+    private ImageView membersBtn;
+
+    @FXML
+    private ImageView addMemberBtn;
     
     @FXML
     private TableView<Task> taskTable;
@@ -124,6 +131,86 @@ public class ViewScheduleController implements Initializable {
     @FXML
     void homeUnHoverAction(MouseEvent event) {
         homeBtn.setImage(new Image("/scheduler/application/assets/images/home_light.png"));
+    }
+    
+    @FXML
+    void memberHoverAction(MouseEvent event) {
+        membersBtn.setImage(new Image("/scheduler/application/assets/images/member_blue.png"));
+    }
+
+    @FXML
+    void memberUnHoverAction(MouseEvent event) {
+        membersBtn.setImage(new Image("/scheduler/application/assets/images/member_light.png"));
+    }
+    @FXML
+    void addMemberHoverAction(MouseEvent event) {
+        addMemberBtn.setImage(new Image("/scheduler/application/assets/images/adduser_blue.png"));
+    }
+    
+     @FXML
+    void addMemberClickAction(MouseEvent event) {
+        JFXDialogLayout dialogLayout = new JFXDialogLayout();
+        
+        dialogLayout.setHeading(new Text("Add Member."));
+        
+        /*
+         * Setting up Node Form to submit Reminder
+         */
+        
+        // Reminder Name
+        JFXTextField rNameTxt = new JFXTextField();
+        rNameTxt.setPadding(new Insets(10, 10, 0, 10));
+        rNameTxt.setPromptText("Enter the Username of the user you want to add!");
+        RequiredFieldValidator validatorName = new RequiredFieldValidator();
+        validatorName.setMessage("Input Required");
+        rNameTxt.getValidators().add(validatorName);
+        rNameTxt.focusedProperty().addListener((o,oldVal,newVal)->{
+            if(!newVal) rNameTxt.validate();
+        });
+        
+        VBox v = new VBox();
+        v.getChildren().add(rNameTxt);
+        
+        // Implemented Node Form into dialogLayout Body
+        dialogLayout.setBody(v);
+        JFXButton btn = new JFXButton("Save Reminder");
+        btn.setStyle("-fx-background-color: #2980b9; -fx-text-fill: #ecf0f1");
+        btn.setRipplerFill(Color.web("#3498db"));
+        JFXDialog dialog = new JFXDialog(anchorPane, dialogLayout,JFXDialog.DialogTransition.CENTER);
+        btn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                try {
+                    read.addMember(rNameTxt.getText(), schedule.getId(), true);
+                } catch (ParseException ex) {
+                    openSnackbar(ex.getMessage(), anchorPane, "Close", 10000);
+                } catch (SQLException ex) {
+                    openSnackbar(ex.getMessage(), anchorPane, "Close", 10000);
+                } catch (Exception ex) {
+                    openSnackbar(ex.getMessage(), anchorPane, "Close", 10000);
+                }
+                
+                dialog.close();
+            }
+        });
+        dialogLayout.setActions(btn);
+        
+        dialog.show();
+    }
+    
+     @FXML
+    void memberClickAction(MouseEvent event) {
+        
+    }
+
+    @FXML
+    void addMemberUnHoverAction(MouseEvent event) {
+
+    }
+
+    @FXML
+    void addMembersUnHoverAction(MouseEvent event) {
+        addMemberBtn.setImage(new Image("/scheduler/application/assets/images/adduser_light.png"));
     }
 
     @FXML
@@ -368,7 +455,7 @@ public class ViewScheduleController implements Initializable {
         rm.getIReadSchedule();
         this.read = rm.getRead();
         
-        this.schedule = user.getPersonalSchedule(rm.getAccount(), schedule);
+        this.schedule = read.getGroupSchedule(rm.getAccount(), schedule);
         setupTaskOverview();
         setupReminderOverview();
         openSnackbar(this.schedule.getName(), anchorPane, "Close", 10000);

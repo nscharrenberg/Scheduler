@@ -27,4 +27,8 @@ public class AccountRepository {
     public Account login(String username, String password) throws SQLException, Exception {
         return context.login(username, password);
     }
+    
+    public Account findUserByUsername(String username) throws SQLException, Exception {
+        return context.findUserByUsername(username);
+    }
 }
