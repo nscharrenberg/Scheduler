@@ -11,12 +11,16 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.List;
 import scheduler.application.dal.mysql.AccountMySQLDao;
+import scheduler.application.dal.mysql.ItemMySQLDao;
 import scheduler.application.dal.mysql.PersonalScheduleMySQLDao;
 import scheduler.application.dal.repository.AccountRepository;
+import scheduler.application.dal.repository.ItemRepository;
 import scheduler.application.dal.repository.PersonalScheduleRepository;
 import scheduler.application.model.Account;
 import scheduler.application.model.GroupSchedule;
 import scheduler.application.model.PersonalSchedule;
+import scheduler.application.model.Reminder;
+import scheduler.application.model.Task;
 import scheduler.application.rmi.interfaces.IReadSchedule;
 import scheduler.application.rmi.interfaces.IUser;
 import scheduler.application.rmi.interfaces.IVisitor;
@@ -33,6 +37,9 @@ public class SchedulerServer extends UnicastRemoteObject implements IUser, IVisi
     static AccountMySQLDao accountDao;
     AccountRepository ar;
     
+    static ItemMySQLDao itemDao;
+    ItemRepository ir;
+    
     // PersonalSchedule DAO
     static PersonalScheduleMySQLDao personalDao;
     PersonalScheduleRepository pr;
@@ -43,12 +50,14 @@ public class SchedulerServer extends UnicastRemoteObject implements IUser, IVisi
         
         personalDao = new PersonalScheduleMySQLDao();
         pr = new PersonalScheduleRepository(personalDao);
+        
+        itemDao = new ItemMySQLDao();
+        ir = new ItemRepository(itemDao);
     }
 
     @Override
     public List<PersonalSchedule> getPersonalSchedules(Account user) throws RemoteException, SQLException, Exception {
-        System.out.println("hit SchedulerServer?");
-        return pr.getPersonalSchedules(user);
+       return pr.getPersonalSchedules(user);
     }
 
     @Override
@@ -62,19 +71,38 @@ public class SchedulerServer extends UnicastRemoteObject implements IUser, IVisi
     }
 
     @Override
-    public boolean addGroupSchedule(Account owner, String name) throws RemoteException {
+    public boolean addGroupSchedule(Account owner, String name) throws RemoteException, SQLException, Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    @Override
+    public boolean addPersonalTask(String name, String description, Timestamp deadline, int schedule) throws RemoteException, SQLException, Exception {
+        return pr.addPersonalTask(name, description, deadline, schedule);
+    }
 
     @Override
-    public void logout(int userId) throws RemoteException {
+    public boolean addPersonalReminder(String name, String description, Timestamp startTime, Timestamp endTime, int schedule) throws RemoteException, SQLException, Exception {
+        return pr.addPersonalReminder(name, description, startTime, endTime, schedule);
+    }
+
+    @Override
+    public void logout(int userId) throws RemoteException, SQLException, Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean deletePersonalSchedule(int scheduleId) throws RemoteException, SQLException, Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public PersonalSchedule getPersonalSchedule(Account user, int scheduleId) throws RemoteException, SQLException, Exception {
+        return pr.getPersonalSchedule(user, scheduleId);
     }
 
     @Override
     public Account login(String username, String password) throws RemoteException, SQLException, Exception {
-            return ar.login(username, password);
+        return ar.login(username, password);
     }
 
     @Override
@@ -83,13 +111,24 @@ public class SchedulerServer extends UnicastRemoteObject implements IUser, IVisi
     }
 
     @Override
-    public GroupSchedule getGroupSchedule(int scheduleId) throws RemoteException {
+    public GroupSchedule getGroupSchedule(int scheduleId) throws RemoteException, SQLException, Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public boolean leaveGroupSchedule(int scheduleId) throws RemoteException {
+    public boolean leaveGroupSchedule(int scheduleId) throws RemoteException, SQLException, Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Task> getTasks(int ScheduleId) throws RemoteException, SQLException, Exception {
+        System.out.println("SchedulerServer: " + ScheduleId);
+        return ir.getTasks(ScheduleId);
+    }
+
+    @Override
+    public List<Reminder> getReminders(int scheduleId) throws RemoteException, SQLException, Exception {
+        return ir.getReminders(scheduleId);
     }
 
     @Override
@@ -142,24 +181,6 @@ public class SchedulerServer extends UnicastRemoteObject implements IUser, IVisi
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public boolean addPersonalTask(String name, String description, Timestamp deadline, int schedule) throws RemoteException, SQLException, Exception {
-        return pr.addPersonalTask(name, description, deadline, schedule);
-    }
-
-    @Override
-    public boolean addPersonalReminder(String name, String description, Timestamp startTime, Timestamp endTime, int schedule) throws RemoteException, SQLException, Exception {
-        return pr.addPersonalReminder(name, description, startTime, endTime, schedule);
-    }
-
-    @Override
-    public boolean deletePersonalSchedule(int scheduleId) throws RemoteException, SQLException, Exception {
-        return pr.deletePersonalSchedule(scheduleId);
-    }
-
-    @Override
-    public PersonalSchedule getPersonalSchedule(Account user, int scheduleId) throws RemoteException, SQLException, Exception {
-        return pr.getPersonalSchedule(user, scheduleId);
-    }
+    
     
 }

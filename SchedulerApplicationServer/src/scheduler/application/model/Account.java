@@ -6,6 +6,7 @@
 package scheduler.application.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  *
@@ -16,6 +17,9 @@ public class Account implements Serializable {
     private String username;
     private String email;
     private String password;
+    
+    private List<PersonalSchedule> personalSchedules;
+    private List<GroupSchedule> groupSchedules;
     
     public Account(int id, String username, String email, String password) {
         this.id = id;
@@ -42,5 +46,21 @@ public class Account implements Serializable {
     
     public void setPassword(String value) {
         this.password = value;
+    }
+    
+    public void setPersonalSchedules(List<PersonalSchedule> schedules) {
+        this.personalSchedules = schedules;
+    }
+    
+    public void setGroupSchedules(List<GroupSchedule> schedules) {
+        this.groupSchedules = schedules;
+    }
+    
+    public List<PersonalSchedule> getPersonalSchedules() {
+        return personalSchedules;
+    }
+    
+    public List<GroupSchedule> getGroupSchedules() {
+        return groupSchedules;
     }
 }

@@ -26,4 +26,8 @@ public class Task extends Item implements Serializable {
         
         this.deadline = deadline;
     }
+    
+    public Timestamp getDeadline() {
+        return deadline;
+    }
 }

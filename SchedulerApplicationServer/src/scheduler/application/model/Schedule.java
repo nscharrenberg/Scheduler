@@ -8,7 +8,6 @@ package scheduler.application.model;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.List;
-
 /**
  *
  * @author Noah Scharrenberg

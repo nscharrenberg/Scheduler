@@ -123,8 +123,7 @@ public class personalProjectsController implements Initializable {
         });
         
         timer = new Timer();
-        timer.scheduleAtFixedRate(new SearchPersonalSchedules(), 2000, 15000);
-
+        timer.scheduleAtFixedRate(new SearchPersonalSchedules(), 2000, 2000);
     } 
     
     public void setup(RegistryManager rm) throws RemoteException {
@@ -206,7 +205,7 @@ public class personalProjectsController implements Initializable {
                 Scene scene = new Scene(root);
                 Stage stage = new Stage();
                 stage.setScene(scene);
-                stage.setTitle("Scheduler - ");
+                stage.setTitle("Scheduler - " + schedule.getName());
                 stage.show();
                 closeCurrentStageThroughTableRow(event);
             }

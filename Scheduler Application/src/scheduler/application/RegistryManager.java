@@ -14,8 +14,10 @@ import java.rmi.registry.Registry;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import scheduler.application.model.Account;
+import scheduler.application.rmi.interfaces.IReadSchedule;
 import scheduler.application.rmi.interfaces.IUser;
 import scheduler.application.rmi.interfaces.IVisitor;
+import scheduler.application.rmi.interfaces.IWriteSchedule;
 
 /**
  *
@@ -26,6 +28,8 @@ public class RegistryManager {
     
     private IVisitor visitor;
     private IUser user;
+    private IReadSchedule read;
+    private IWriteSchedule write;
     
     private static final int port = 1099;
     private static final String bindingName = "SchedulerServer";
@@ -55,6 +59,14 @@ public class RegistryManager {
         return user;
     }
     
+    public IReadSchedule getRead() {
+        return read;
+    }
+    
+    public IWriteSchedule getWrite() {
+        return write;
+    }
+    
     public void getIVisitor() {
         if(registry != null) {
             System.out.println("Client: Trying to find IVisitor Interface");
@@ -67,6 +79,42 @@ public class RegistryManager {
                 visitor = null;
             } catch (NotBoundException e) {
                 System.out.println("Client: IVisitor Interface reference is NOT bound!");
+                System.out.println("Client: Exception Message: " + e.getMessage());
+                visitor = null;
+            }
+        }
+    }
+    
+    public void getIReadSchedule() {
+        if(registry != null) {
+            System.out.println("Client: Trying to find IReadSchedule Interface");
+            try {
+                this.read = (IReadSchedule)registry.lookup(bindingName);
+                System.out.println("Client: IReadSchedule Interface succesfully bounded");
+            } catch (RemoteException e) {
+                System.out.println("Client: Unable to bind IReadSchedule Interface");
+                System.out.println("Client: Exception Message: " + e.getMessage());
+                visitor = null;
+            } catch (NotBoundException e) {
+                System.out.println("Client: IReadSchedule Interface reference is NOT bound!");
+                System.out.println("Client: Exception Message: " + e.getMessage());
+                visitor = null;
+            }
+        }
+    }
+    
+    public void getIWriteSchedule() {
+        if(registry != null) {
+            System.out.println("Client: Trying to find IWriteSchedule Interface");
+            try {
+                this.write = (IWriteSchedule)registry.lookup(bindingName);
+                System.out.println("Client: IWriteSchedule Interface succesfully bounded");
+            } catch (RemoteException e) {
+                System.out.println("Client: Unable to bind IWriteSchedule Interface");
+                System.out.println("Client: Exception Message: " + e.getMessage());
+                visitor = null;
+            } catch (NotBoundException e) {
+                System.out.println("Client: IWriteSchedule Interface reference is NOT bound!");
                 System.out.println("Client: Exception Message: " + e.getMessage());
                 visitor = null;
             }
