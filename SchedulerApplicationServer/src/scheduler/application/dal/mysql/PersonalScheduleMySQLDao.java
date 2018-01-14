@@ -34,7 +34,8 @@ public class PersonalScheduleMySQLDao implements IPersonalScheduleInterface {
     static final String ADD_PERSONAL_TASK = "INSERT INTO task(name, description, deadline, schedule_id, created_at) VALUES(?, ?, ?, ?, ?)";
     static final String ADD_PERSONAL_REMINDER = "INSERT INTO reminder(name, description, start_time, end_time, schedule_id, created_at) VALUES(?, ?, ?, ?, ?, ?)";
     static final String DELETE_PERSONAL_SCHEDULE = "DELETE FROM schedule WHERE id = ?";
-   
+    static final String GET_MY_PERSONAL_SCHEDULE = "SELECT * FROM schedule WHERE id = ? AND owner = ? AND isPersonal = 1";
+    
     @Override
     public boolean addPersonalSchedule(Account owner, String name) throws SQLException, Exception {
         conn.getConnection();
@@ -158,6 +159,30 @@ public class PersonalScheduleMySQLDao implements IPersonalScheduleInterface {
         conn.closeConnection();
         
         return schedules;
+    }
+    
+    @Override
+    public PersonalSchedule getPersonalSchedule(Account user, int scheduleId) throws SQLException, Exception {
+        PersonalSchedule schedule = null;
+        System.out.println("User ID" + user.getId());
+        System.out.println("Schedule ID: " + scheduleId);
+        System.out.println("SELECT * FROM schedule WHERE id = " + scheduleId + " AND owner = " + user.getId() +  "  AND isPersonal = 1");
+        conn.getConnection();
+        pstmt = conn.getConn().prepareStatement(GET_MY_PERSONAL_SCHEDULE);
+        pstmt.setInt(1, scheduleId);
+        pstmt.setInt(2, user.getId());
+        System.out.println("PRE Get ScheduleName. ");
+        try(ResultSet tempRs = pstmt.executeQuery()) {
+            rs = tempRs;
+            rs.next();
+            
+            schedule = new PersonalSchedule(scheduleId, user, rs.getString("name"), rs.getTimestamp("created_at"));
+            System.out.println("Get ScheduleName: " + schedule.getName());
+        }
+        
+        conn.closeConnection();
+        
+        return schedule;
     }
     
 }

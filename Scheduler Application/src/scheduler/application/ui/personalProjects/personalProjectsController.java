@@ -68,6 +68,8 @@ import scheduler.application.model.Schedule;
 import scheduler.application.rmi.interfaces.IUser;
 import scheduler.application.rmi.interfaces.IVisitor;
 import scheduler.application.ui.addSchedule.AddScheduleController;
+import scheduler.application.ui.personalProjects.view.ViewScheduleController;
+import sun.security.x509.RDN;
 
 /**
  *
@@ -112,16 +114,16 @@ public class personalProjectsController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         scheduleTables.setRowFactory(tv -> {
             TableRow<PersonalSchedule> row = new TableRow<>();
-            row.setOnMouseClicked(Event -> {
+            row.setOnMouseClicked(event -> {
                 PersonalSchedule rd = row.getItem();
-                System.out.println("Select Item on Row: " + rd.getName());
+                viewPersonalSchedule(event, rd);
             });
             
             return row;
         });
         
         timer = new Timer();
-        timer.scheduleAtFixedRate(new SearchPersonalSchedules(), 0, 5000);
+        timer.scheduleAtFixedRate(new SearchPersonalSchedules(), 2000, 15000);
 
     } 
     
@@ -145,17 +147,24 @@ public class personalProjectsController implements Initializable {
     }
     
     private void closeCurrentStageThroughJFXButton(Event event) {
+        if(timer != null) {
+            timer.cancel();
+        }
+        
         ((Stage)(((JFXButton)event.getSource()).getScene().getWindow())).close();
+    }
+    
+    private void closeCurrentStageThroughTableRow(Event event) {
+        if(timer != null) {
+            timer.cancel();
+        }
+        
+        ((Stage)(((TableRow)event.getSource()).getScene().getWindow())).close();
     }
     
     public ObservableList<PersonalSchedule> getSchedules() throws RemoteException, SQLException, Exception {
         ObservableList<PersonalSchedule> schedules = FXCollections.observableArrayList();
         schedules.addAll(user.getPersonalSchedules(rm.getAccount()));
-        
-        for (Iterator<PersonalSchedule> i = user.getPersonalSchedules(rm.getAccount()).iterator(); i.hasNext();) {
-                PersonalSchedule item = i.next();
-                System.out.println(item.getName() + " - " + item.getCreatedAt());
-            }
 
         return schedules;
     }
@@ -187,6 +196,26 @@ public class personalProjectsController implements Initializable {
         }
     }
     
+    public void viewPersonalSchedule(MouseEvent event, PersonalSchedule schedule) {
+        try {
+            if(rm.getAccount() != null) {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/scheduler/application/ui/personalProjects/view/viewSchedule.fxml"));
+                Parent root = loader.load();
+                ViewScheduleController controller = (ViewScheduleController) loader.getController();
+                controller.setup(rm, schedule.getId());
+                Scene scene = new Scene(root);
+                Stage stage = new Stage();
+                stage.setScene(scene);
+                stage.setTitle("Scheduler - ");
+                stage.show();
+                closeCurrentStageThroughTableRow(event);
+            }
+        } catch (Exception ex) {
+            openSnackbar(ex.getMessage(), anchorPane, "Close", 10000);
+            ex.printStackTrace();
+        }
+    }
+    
     class SearchPersonalSchedules extends TimerTask {
     
         @Override
@@ -201,8 +230,6 @@ public class personalProjectsController implements Initializable {
                 openSnackbar(ex.getMessage(), anchorPane, "Close", 10000);
             }
         }
-        
-        
     }
 }
 

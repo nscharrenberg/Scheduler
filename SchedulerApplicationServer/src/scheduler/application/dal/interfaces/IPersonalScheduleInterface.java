@@ -22,4 +22,5 @@ public interface IPersonalScheduleInterface {
     boolean addPersonalReminder(String name, String description, Timestamp startTime, Timestamp endTime, int schedule) throws SQLException, Exception;
     boolean deletePersonalSchedule(int scheduleId) throws SQLException, Exception;
     List<PersonalSchedule> getPersonalSchedules(Account user) throws SQLException, Exception;
+    PersonalSchedule getPersonalSchedule(Account user, int scheduleId) throws SQLException, Exception;
 }

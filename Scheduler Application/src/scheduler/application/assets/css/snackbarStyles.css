@@ -20,6 +20,13 @@ and open the template in the editor.
     -fx-text-fill: #ecf0f1;
 }
 
+.homebtn {
+    -fx-graphic: url("../../../assets/images/home_light.png");
+}
+
+.homebtn:hover {
+    -fx-graphic: url("../../../assets/images/home_dark.png");
+}
 
 
 

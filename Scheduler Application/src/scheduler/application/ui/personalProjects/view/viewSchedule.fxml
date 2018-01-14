@@ -1,11 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="scheduler.application.ui.personalProjects.view.ViewScheduleController">
-    
-</AnchorPane>
+<StackPane fx:id="anchorPane" prefHeight="400.0" prefWidth="600.0" stylesheets="@../../../assets/css/snackbarStyles.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="scheduler.application.ui.personalProjects.view.ViewScheduleController">
+   <children>
+      <BorderPane prefHeight="400.0" prefWidth="600.0">
+         <top>
+            <HBox prefHeight="50.0" prefWidth="600.0" style="-fx-background-color: #2c3e50;" BorderPane.alignment="CENTER">
+               <children>
+                  <ImageView fx:id="homeBtn" fitHeight="30.0" fitWidth="30.0" onMouseClicked="#homeClickAction" onMouseEntered="#homeHoverAction" onMouseExited="#homeUnHoverAction" pickOnBounds="true" preserveRatio="true" styleClass="homebtn">
+                     <image>
+                        <Image url="@../../../assets/images/home_light.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets left="10.0" top="10.0" />
+                     </HBox.margin>
+                  </ImageView>
+                  <ImageView fx:id="taskBtn" fitHeight="30.0" fitWidth="30.0" onMouseClicked="#taskClickAction" onMouseEntered="#taskHoverAction" onMouseExited="#taskUnHoverAction" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../assets/images/task_light.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets left="30.0" top="10.0" />
+                     </HBox.margin>
+                  </ImageView>
+                  <ImageView fx:id="reminderBtn" fitHeight="30.0" fitWidth="30.0" onMouseClicked="#reminderClickAction" onMouseEntered="#reminderHoverAction" onMouseExited="#reminderUnHoverAction" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../assets/images/reminder_light.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets left="30.0" top="10.0" />
+                     </HBox.margin>
+                  </ImageView>
+               </children>
+            </HBox>
+         </top>
+      </BorderPane>
+   </children>
+</StackPane>

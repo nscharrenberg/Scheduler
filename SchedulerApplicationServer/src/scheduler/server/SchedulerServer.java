@@ -46,11 +46,6 @@ public class SchedulerServer extends UnicastRemoteObject implements IUser, IVisi
     }
 
     @Override
-    public PersonalSchedule getPersonalSchedule(Account user) throws RemoteException, SQLException, Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public List<PersonalSchedule> getPersonalSchedules(Account user) throws RemoteException, SQLException, Exception {
         System.out.println("hit SchedulerServer?");
         return pr.getPersonalSchedules(user);
@@ -160,6 +155,11 @@ public class SchedulerServer extends UnicastRemoteObject implements IUser, IVisi
     @Override
     public boolean deletePersonalSchedule(int scheduleId) throws RemoteException, SQLException, Exception {
         return pr.deletePersonalSchedule(scheduleId);
+    }
+
+    @Override
+    public PersonalSchedule getPersonalSchedule(Account user, int scheduleId) throws RemoteException, SQLException, Exception {
+        return pr.getPersonalSchedule(user, scheduleId);
     }
     
 }

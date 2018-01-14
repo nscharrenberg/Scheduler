@@ -40,7 +40,10 @@ public class PersonalScheduleRepository {
     }
     
     public List<PersonalSchedule> getPersonalSchedules(Account user) throws SQLException, Exception {
-        System.out.println("Hit PersonalScheduleRepo?");
         return context.getPersonalSchedules(user);
+    }
+    
+    public PersonalSchedule getPersonalSchedule(Account user, int scheduleId) throws SQLException, Exception {
+        return context.getPersonalSchedule(user, scheduleId);
     }
 }
